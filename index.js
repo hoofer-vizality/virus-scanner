@@ -21,7 +21,8 @@ export default class VirusScanner extends Plugin {
         res.set("x-apikey", this.settings.get("apikey",""))
         res.send({ url: url }).then(body=>{
             var data = body.body.data.id.split("-")[1];
-            shell.openExternal(`https://www.virustotal.com/gui/url/${data}/detection`)
+            vizality.api.popups.openPopup({ url: `https://www.virustotal.com/gui/url/${data}/detection` });
+            //shell.openExternal(`https://www.virustotal.com/gui/url/${data}/detection`)
         }).catch(err=>{
             if (err.statusCode == 401){
                 // unauthorized || invalid api key
